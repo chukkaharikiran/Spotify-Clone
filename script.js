@@ -1,15 +1,15 @@
 console.log('spotify clone')
 
 // Initialize the variables
-let songIndex = 1;
+let songIndex = 0;
 let audioElement = new Audio('songs/1.mp3');
 let previousButton = document.getElementById('previousButton');
 let playButton = document.getElementById('playButton');
 let nextButton = document.getElementById('nextButton');
 let songCoverImage = document.getElementById('songCoverImg')
 let songNameDisplay = document.getElementById('songNameDisplay');
-let songPlayBtn = Array.from(document.getElementsByClassName('songPlay')); //converting from HTML collection to array collection
-console.log(playButton)
+let songPlayBtn = Array.from(document.getElementsByClassName('songPlay'));
+let songItems = Array.from(document.getElementsByClassName('songItem'));
 
 let songs = [
     {songName: "Peaches", coverPath: "https://i.scdn.co/image/ab67616d0000b2736036cfd2a718036fc523855f"},
@@ -23,6 +23,12 @@ let songs = [
     {songName: "Cheating On You", coverPath: "https://i.scdn.co/image/ab67616d00001e02897f73256b9128a9d70eaf66"},
     {songName: "Play Date", coverPath: "https://i.scdn.co/image/ab67616d0000b2733899712512f50a8d9e01e951"},
 ]
+
+songItems.forEach((element, i) => {
+    element.getElementsByTagName('img')[0].src = songs[i].coverPath;
+    element.getElementsByClassName('songName')[0].innerText = songs[i].songName;
+})
+
 
 //Play & Pause the music
 playButton.addEventListener('click', function () {
@@ -54,12 +60,12 @@ const makeAllPlays = ()=> {
 songPlayBtn.forEach(element => {
     element.addEventListener('click', function(e) {
         makeAllPlays();
-        songIndex = e.target.id;
+        songIndex = parseInt(e.target.id);
         e.target.classList.remove('fa-circle-play');
         e.target.classList.add('fa-circle-pause');
-        audioElement.src = `songs/${songIndex}.mp3`;
-        songCoverImage.src = songs[songIndex-1].coverPath;
-        songNameDisplay.innerText = songs[songIndex-1].songName;
+        audioElement.src = `songs/${songIndex+1}.mp3`;
+        songCoverImage.src = songs[songIndex].coverPath;
+        songNameDisplay.innerText = songs[songIndex].songName;
         audioElement.currentTime = 0;
         audioElement.play()
         playButton.classList.remove('fa-circle-play');
@@ -69,42 +75,42 @@ songPlayBtn.forEach(element => {
 
 //This will perform user press the previous button
 previousButton.addEventListener('click', function(){
-    if(songIndex <= 1){
-        songIndex = 1;
+    if(songIndex <= 0){
+        songIndex = 0;
     }
     else{
         songIndex -= 1;
     }
-    audioElement.src = `songs/${songIndex}.mp3`;
-    songCoverImage.src = songs[songIndex-1].coverPath;
-    songNameDisplay.innerText = songs[songIndex-1].songName;
+    audioElement.src = `songs/${songIndex+1}.mp3`;
+    songCoverImage.src = songs[songIndex].coverPath;
+    songNameDisplay.innerText = songs[songIndex].songName;
     audioElement.currentTime = 0;
     audioElement.play()
     playButton.classList.remove('fa-circle-play');
     playButton.classList.add('fa-circle-pause');
     makeAllPlays();
-    songPlayBtn[songIndex-1].classList.remove('fa-circle-play');
-    songPlayBtn[songIndex-1].classList.add('fa-circle-pause');
+    songPlayBtn[songIndex].classList.remove('fa-circle-play');
+    songPlayBtn[songIndex].classList.add('fa-circle-pause');
 })
 
 //This will perform user press the next button
 nextButton.addEventListener('click', function(){
-    if(songIndex >= 10){
-        songIndex = 1;
+    if(songIndex >= 9){
+        songIndex = 0;
     }
     else{
         songIndex += 1;
     }
-    audioElement.src = `songs/${songIndex}.mp3`;
-    songCoverImage.src = songs[songIndex-1].coverPath;
-    songNameDisplay.innerText = songs[songIndex-1].songName;
+    audioElement.src = `songs/${songIndex+1}.mp3`;
+    songCoverImage.src = songs[songIndex].coverPath;
+    songNameDisplay.innerText = songs[songIndex].songName;
     audioElement.currentTime = 0;
     audioElement.play()
     playButton.classList.remove('fa-circle-play');
     playButton.classList.add('fa-circle-pause');
     makeAllPlays();
-    songPlayBtn[songIndex-1].classList.remove('fa-circle-play');
-    songPlayBtn[songIndex-1].classList.add('fa-circle-pause');
+    songPlayBtn[songIndex].classList.remove('fa-circle-play');
+    songPlayBtn[songIndex].classList.add('fa-circle-pause');
 })
 
 //update seekbar

@@ -42,25 +42,26 @@ ul li{
 }
 
 .song-list{
-    width: 80%;
-    padding: 20px;
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    margin: 0px auto;
-    box-sizing: border-box;
+    margin-top: 40px;
 }
 
 .songItem{
-    width: 150px;
+    flex-basis: 10%;
+    margin-bottom: 40px;
     height: 220px;
     background-color: #1a1a1a;
     color: white;
     border-radius: 5px;
     text-align: center;
     padding: 20px;
-    margin: 10px;
 }
 
 .songItem img{
@@ -116,8 +117,19 @@ ul li{
     cursor: pointer;
 }
 
-/* Extra small devices (phones, 500px and down) */
-@media only screen and (max-width: 575px) {
+
+/* Small and medium devices (portrait & landscape tablets, large phones, 900px and down) */
+@media only screen and (max-width: 900px) {
+    .song-list{
+        max-width: 650px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    .songItem{
+        flex-basis: 20%;
+        margin-bottom: 30px;
+    }
 
     .playlist-banner{
         height: 200px;
@@ -125,27 +137,6 @@ ul li{
         background-position: top;
     }
 
-    .song-list{
-        width: 90%;
-        padding: 10px;
-        margin: 0px auto;
-    }
-    
-    .songItem{
-        width: 140px;
-        height: 215px;
-        padding: 10px;
-        margin: 10px;
-    }
-    
-    .songItem img{
-        width: 140px;
-    }
-    
-    .songItem span{
-        font-size: 0.8em;
-    }
-    
     .bottom{
         height: 120px;
     }
@@ -165,41 +156,24 @@ ul li{
     }
 } 
 
-@media only screen and (max-width: 1200px) {
-    
-    .bottom{
-        height: 120px;
-    }
-    
-    #songCoverImg{
-        left: 7vw;
-        width: 50px;
-    }
-    
-    #songCoverImg{
-        left: 5vw;
-        width: 60px;
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .songItem{
+        flex-basis: 35%;
+        margin-bottom: 30px;
+        height: 200px;
+        padding: 15px;
     }
 
-    #songNameDisplay{
-        position: static;
+    .songName{
+        font-size: 13px;
     }
     
-    #songProgressBar{
-        width: 60vw;
-        cursor: pointer;
+    .songItem img{
+        width: 130px;
     }
-} 
 
-@media only screen and (min-width: 1100px) and (max-width: 1360px) {
-    .song-list{
-        width: 60%;
+    .songItem i{
+        padding-top: 10px;
     }
 }
-
-@media only screen and (min-width: 1600px) {
-    .song-list{
-        width: 60%;
-    }
-}
-
